@@ -1,5 +1,6 @@
 "use client";
-
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 

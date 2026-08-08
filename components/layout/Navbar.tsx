@@ -1,39 +1,162 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import Button from "@/components/ui/Button";
 import emailjs from "@emailjs/browser";
 
-export default function Contact() {
-  const form = useRef<HTMLFormElement>(null);
-  const [loading, setLoading] = useState(false);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  const [status, setStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
-
-  const sendEmail = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!form.current) return;
-
-    setLoading(true);
-    setStatus("idle");
-
-    try {
-      await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        form.current,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      );
-
-      setStatus("success");
-      form.current.reset();
-    } catch (error) {
-      console.error("EmailJS Error:", error);
-      setStatus("error");
-    } finally {
-      setLoading(false);
-    }
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  return (
+    <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+
+        {/* Logo */}
+        <Link
+          href="/"
+          className="text-2xl sm:text-3xl font-black text-purple-600"
+        >
+          Shivniq Studio
+        </Link>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8 font-medium text-gray-700 dark:text-gray-200">
+
+          <Link
+            href="#home"
+            className="hover:text-purple-600 transition"
+          >
+            Home
+          </Link>
+
+          <Link
+            href="#services"
+            className="hover:text-purple-600 transition"
+          >
+            Services
+          </Link>
+
+          <Link
+            href="#portfolio"
+            className="hover:text-purple-600 transition"
+          >
+            Portfolio
+          </Link>
+
+          <Link
+            href="#contact"
+            className="hover:text-purple-600 transition"
+          >
+            Contact
+          </Link>
+
+        </div>
+
+        {/* Desktop Right */}
+        <div className="hidden md:flex items-center gap-4">
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="w-11 h-11 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Sun size={20} className="text-yellow-400" />
+            ) : (
+              <Moon size={20} className="text-gray-700" />
+            )}
+          </button>
+
+          <Button>
+            Start Project
+          </Button>
+
+        </div>
+
+        {/* Mobile Controls */}
+        <div className="md:hidden flex items-center gap-3">
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Sun size={19} className="text-yellow-400" />
+            ) : (
+              <Moon size={19} className="text-gray-700 dark:text-white" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="text-gray-800 dark:text-white"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={30} /> : <Menu size={30} />}
+          </button>
+
+        </div>
+
+      </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+
+          <div className="flex flex-col p-6 gap-6 text-gray-800 dark:text-gray-200">
+
+            <Link
+              href="#home"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="#services"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
+              Services
+            </Link>
+
+            <Link
+              href="#portfolio"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
+              Portfolio
+            </Link>
+
+            <Link
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
+              Contact
+            </Link>
+
+            <Button>
+              Start Project
+            </Button>
+
+          </div>
+
+        </div>
+      )}
+    </nav>
+  );
 }
