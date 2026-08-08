@@ -34,9 +34,9 @@ export default function Contact() {
 
   return (
     <section
-      id="contact"
-      className="bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
-    >
+  id="contact"
+  className="relative bg-red-100 dark:bg-red-950 transition-colors duration-300"
+>
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
 
         {/* Heading */}
