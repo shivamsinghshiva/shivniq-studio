@@ -1,6 +1,5 @@
 "use client";
-import { Menu, X, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -8,12 +7,17 @@ export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
 
+  const [status, setStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
   const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!form.current) return;
 
     setLoading(true);
+    setStatus("idle");
 
     try {
       await emailjs.sendForm(
@@ -23,32 +27,32 @@ export default function Contact() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      alert("✅ Message Sent Successfully!");
+      setStatus("success");
       form.current.reset();
     } catch (error) {
       console.error("EmailJS Error:", error);
-      alert("❌ Failed to send message. Please try again.");
+      setStatus("error");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-   <section
-  id="contact"
-  className="scroll-mt-24 bg-white dark:bg-gray-950 transition-colors duration-300"
->
+    <section
+      id="contact"
+      className="scroll-mt-24 bg-white dark:bg-gray-950 transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
 
         {/* Heading */}
         <div className="text-center">
-       <span className="text-purple-600 dark:text-purple-400 font-semibold text-sm sm:text-base">
-  CONTACT US
-</span>
+          <span className="text-purple-600 dark:text-purple-400 font-semibold text-sm sm:text-base">
+            CONTACT US
+          </span>
 
-         <h2 className="text-4xl sm:text-5xl font-black mt-4 text-gray-900 dark:text-white">
-  Let's Build Something Amazing
-</h2>
+          <h2 className="text-4xl sm:text-5xl font-black mt-4 text-gray-900 dark:text-white">
+            Let's Build Something Amazing
+          </h2>
 
           <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto text-sm sm:text-base leading-7">
             Have a project in mind? We'd love to hear from you.
@@ -109,7 +113,7 @@ export default function Contact() {
           <form
             ref={form}
             onSubmit={sendEmail}
-           className="bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-xl dark:shadow-purple-950/20 p-5 sm:p-8 space-y-5 sm:space-y-6 backdrop-blur-sm"
+            className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-xl dark:shadow-black/30 p-5 sm:p-8 space-y-5 sm:space-y-6"
           >
 
             <input
@@ -117,7 +121,7 @@ export default function Contact() {
               name="from_name"
               placeholder="Your Name"
               required
-             className="w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition"
             />
 
             <input
@@ -125,7 +129,7 @@ export default function Contact() {
               name="from_email"
               placeholder="Email Address"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition"
             />
 
             <input
@@ -133,7 +137,7 @@ export default function Contact() {
               name="subject"
               placeholder="Subject"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition"
             />
 
             <textarea
@@ -141,9 +145,24 @@ export default function Contact() {
               name="message"
               placeholder="Your Message"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition resize-none"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition resize-none"
             />
 
+            {/* Success */}
+            {status === "success" && (
+              <div className="rounded-xl border border-green-200 dark:border-green-900 bg-green-50 dark:bg-green-950/40 px-4 py-3 text-sm font-medium text-green-700 dark:text-green-400">
+                ✅ Your message has been sent successfully!
+              </div>
+            )}
+
+            {/* Error */}
+            {status === "error" && (
+              <div className="rounded-xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/40 px-4 py-3 text-sm font-medium text-red-700 dark:text-red-400">
+                ❌ Failed to send your message. Please try again.
+              </div>
+            )}
+
+            {/* Button */}
             <button
               type="submit"
               disabled={loading}
