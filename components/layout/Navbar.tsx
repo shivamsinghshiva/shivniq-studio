@@ -1,162 +1,186 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import Button from "@/components/ui/Button";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+export default function Contact() {
+  const form = useRef<HTMLFormElement>(null);
+  const [loading, setLoading] = useState(false);
+
+  const [status, setStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  const sendEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    setLoading(true);
+    setStatus("idle");
+
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        form.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      setStatus("success");
+      form.current.reset();
+
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setStatus("error");
+
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90">
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <section
+      id="contact"
+      className="bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
+    >
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
 
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-3xl font-black text-purple-600"
-        >
-          Shivniq Studio
-        </Link>
+        {/* Heading */}
+        <div className="text-center">
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 font-medium text-gray-700 dark:text-gray-200">
-          <Link
-            href="#home"
-            className="hover:text-purple-600 transition"
-          >
-            Home
-          </Link>
+          <span className="text-purple-600 dark:text-purple-400 font-semibold text-sm sm:text-base">
+            CONTACT US
+          </span>
 
-          <Link
-            href="#services"
-            className="hover:text-purple-600 transition"
-          >
-            Services
-          </Link>
+          <h2 className="text-4xl sm:text-5xl font-black mt-4 text-gray-900 dark:text-white">
+            Let's Build Something Amazing
+          </h2>
 
-          <Link
-            href="#portfolio"
-            className="hover:text-purple-600 transition"
-          >
-            Portfolio
-          </Link>
-
-          <Link
-            href="#contact"
-            className="hover:text-purple-600 transition"
-          >
-            Contact
-          </Link>
-        </div>
-
-        {/* Desktop Right Side */}
-        <div className="hidden md:flex items-center gap-4">
-
-          {/* Theme Toggle */}
-          <button
-            type="button"
-            onClick={() =>
-              setTheme(theme === "dark" ? "light" : "dark")
-            }
-            className="w-11 h-11 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? (
-              <Sun size={20} className="text-yellow-400" />
-            ) : (
-              <Moon size={20} className="text-gray-700" />
-            )}
-          </button>
-
-          <Button>
-            Start Project
-          </Button>
+          <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto text-sm sm:text-base leading-7">
+            Have a project in mind? We'd love to hear from you.
+          </p>
 
         </div>
 
-        {/* Mobile Controls */}
-        <div className="md:hidden flex items-center gap-3">
+        {/* Content */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 mt-14 sm:mt-20">
 
-          {/* Theme Toggle */}
-          <button
-            type="button"
-            onClick={() =>
-              setTheme(theme === "dark" ? "light" : "dark")
-            }
-            className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-            aria-label="Toggle theme"
+          {/* Left */}
+          <div className="flex flex-col justify-center">
+
+            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+              Get In Touch
+            </h3>
+
+            <p className="mt-5 sm:mt-6 text-gray-600 dark:text-gray-300 leading-7 sm:leading-8 max-w-xl">
+              Tell us about your project and we'll get back to you
+              within 24 hours.
+            </p>
+
+            <div className="mt-8 sm:mt-10 space-y-6">
+
+              <div>
+                <h4 className="font-bold text-gray-900 dark:text-white">
+                  Email
+                </h4>
+
+                <p className="mt-1 text-gray-500 dark:text-gray-400 break-all">
+                  hello@shivniqstudio.com
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-gray-900 dark:text-white">
+                  Phone
+                </h4>
+
+                <p className="mt-1 text-gray-500 dark:text-gray-400">
+                  +91 9876543210
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-gray-900 dark:text-white">
+                  Location
+                </h4>
+
+                <p className="mt-1 text-gray-500 dark:text-gray-400">
+                  Uttar Pradesh, India
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Form */}
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+            className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-lg p-5 sm:p-8 space-y-5 sm:space-y-6"
           >
-            {theme === "dark" ? (
-              <Sun size={19} className="text-yellow-400" />
-            ) : (
-              <Moon size={19} />
+
+            <input
+              type="text"
+              name="from_name"
+              placeholder="Your Name"
+              required
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
+            />
+
+            <input
+              type="email"
+              name="from_email"
+              placeholder="Email Address"
+              required
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
+            />
+
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              required
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
+            />
+
+            <textarea
+              rows={5}
+              name="message"
+              placeholder="Your Message"
+              required
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition resize-none"
+            />
+
+            {/* Success Message */}
+            {status === "success" && (
+              <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700 dark:border-green-900 dark:bg-green-950/40 dark:text-green-400">
+                ✅ Your message has been sent successfully!
+              </div>
             )}
-          </button>
 
-          {/* Menu Button */}
-          <button
-            type="button"
-            className="text-gray-800 dark:text-white"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={30} /> : <Menu size={30} />}
-          </button>
+            {/* Error Message */}
+            {status === "error" && (
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-400">
+                ❌ Failed to send your message. Please try again.
+              </div>
+            )}
+
+            {/* Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 py-3.5 sm:py-4 text-white font-bold hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+
+          </form>
 
         </div>
 
       </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-
-          <div className="flex flex-col p-6 gap-6 text-gray-800 dark:text-gray-200">
-
-            <Link
-              href="#home"
-              onClick={() => setOpen(false)}
-              className="hover:text-purple-600 transition"
-            >
-              Home
-            </Link>
-
-            <Link
-              href="#services"
-              onClick={() => setOpen(false)}
-              className="hover:text-purple-600 transition"
-            >
-              Services
-            </Link>
-
-            <Link
-              href="#portfolio"
-              onClick={() => setOpen(false)}
-              className="hover:text-purple-600 transition"
-            >
-              Portfolio
-            </Link>
-
-            <Link
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="hover:text-purple-600 transition"
-            >
-              Contact
-            </Link>
-
-            <Button>
-              Start Project
-            </Button>
-
-          </div>
-
-        </div>
-      )}
-    </nav>
+    </section>
   );
 }

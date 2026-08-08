@@ -11,6 +11,7 @@ import Testimonials from "@/components/home/Testimonials";
 import Contact from "@/components/home/Contact";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
       <Contact />
       <Footer />
       <ScrollToTop />
+      <WhatsAppButton />
     </>
   );
 }

@@ -23,7 +23,6 @@ export default function Contact() {
       );
 
       alert("✅ Message Sent Successfully!");
-
       form.current.reset();
     } catch (error) {
       console.error("EmailJS Error:", error);
@@ -38,47 +37,46 @@ export default function Contact() {
       id="contact"
       className="bg-gray-50 dark:bg-gray-950 transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto px-8 py-24">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
 
         {/* Heading */}
         <div className="text-center">
-
-          <span className="text-purple-600 dark:text-purple-400 font-semibold">
+          <span className="text-purple-600 dark:text-purple-400 font-semibold text-sm sm:text-base">
             CONTACT US
           </span>
 
-          <h2 className="text-5xl font-black mt-4 text-gray-900 dark:text-white">
+          <h2 className="text-4xl sm:text-5xl font-black mt-4 text-gray-900 dark:text-white">
             Let's Build Something Amazing
           </h2>
 
-          <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto text-sm sm:text-base leading-7">
             Have a project in mind? We'd love to hear from you.
           </p>
-
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mt-20">
+        {/* Content */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 mt-14 sm:mt-20">
 
           {/* Left */}
-          <div>
+          <div className="flex flex-col justify-center">
 
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
               Get In Touch
             </h3>
 
-            <p className="mt-6 text-gray-600 dark:text-gray-300 leading-8">
+            <p className="mt-5 sm:mt-6 text-gray-600 dark:text-gray-300 leading-7 sm:leading-8 max-w-xl">
               Tell us about your project and we'll get back to you
               within 24 hours.
             </p>
 
-            <div className="mt-10 space-y-6">
+            <div className="mt-8 sm:mt-10 space-y-6">
 
               <div>
                 <h4 className="font-bold text-gray-900 dark:text-white">
                   Email
                 </h4>
 
-                <p className="text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-gray-500 dark:text-gray-400 break-all">
                   hello@shivniqstudio.com
                 </p>
               </div>
@@ -88,7 +86,7 @@ export default function Contact() {
                   Phone
                 </h4>
 
-                <p className="text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-gray-500 dark:text-gray-400">
                   +91 9876543210
                 </p>
               </div>
@@ -98,20 +96,19 @@ export default function Contact() {
                   Location
                 </h4>
 
-                <p className="text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-gray-500 dark:text-gray-400">
                   Uttar Pradesh, India
                 </p>
               </div>
 
             </div>
-
           </div>
 
-          {/* Right */}
+          {/* Form */}
           <form
             ref={form}
             onSubmit={sendEmail}
-            className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-lg p-8 space-y-6 transition-colors duration-300"
+            className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-lg p-5 sm:p-8 space-y-5 sm:space-y-6"
           >
 
             <input
@@ -119,7 +116,7 @@ export default function Contact() {
               name="from_name"
               placeholder="Your Name"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-5 py-4 outline-none focus:border-purple-600 transition"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
             />
 
             <input
@@ -127,7 +124,7 @@ export default function Contact() {
               name="from_email"
               placeholder="Email Address"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-5 py-4 outline-none focus:border-purple-600 transition"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
             />
 
             <input
@@ -135,7 +132,7 @@ export default function Contact() {
               name="subject"
               placeholder="Subject"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-5 py-4 outline-none focus:border-purple-600 transition"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
             />
 
             <textarea
@@ -143,13 +140,13 @@ export default function Contact() {
               name="message"
               placeholder="Your Message"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-5 py-4 outline-none focus:border-purple-600 transition resize-none"
+              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition resize-none"
             />
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 py-4 text-white font-bold hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 py-3.5 sm:py-4 text-white font-bold hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
