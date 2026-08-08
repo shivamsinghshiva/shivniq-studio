@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Button from "@/components/ui/Button";
-import emailjs from "@emailjs/browser";
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

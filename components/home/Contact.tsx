@@ -82,7 +82,7 @@ export default function Contact() {
                 </h4>
 
                 <p className="mt-1 text-gray-500 dark:text-gray-400 break-all">
-                  hello@shivniqstudio.com
+                  shivniqstudio@gmail.com
                 </p>
               </div>
 
@@ -92,7 +92,7 @@ export default function Contact() {
                 </h4>
 
                 <p className="mt-1 text-gray-500 dark:text-gray-400">
-                  +91 9876543210
+                  +91 9517468734
                 </p>
               </div>
 

@@ -139,7 +139,7 @@ export default function Footer() {
             </p>
 
             <p className="text-purple-400 break-all">
-              shivniqstudio@sgmail.com
+              shivniqstudio@gmail.com
             </p>
 
           </div>
