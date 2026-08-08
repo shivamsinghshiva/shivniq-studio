@@ -46,31 +46,40 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://shivniq-studio.vercel.app"),
 
   openGraph: {
-  title: "Shivniq Studio | Premium Web & App Development",
-  description:
-    "We build modern websites, web applications, mobile apps and AI solutions for startups and businesses.",
-  url: "https://shivniq-studio.vercel.app",
-  siteName: "Shivniq Studio",
-  type: "website",
-  locale: "en_IN",
+    title: "Shivniq Studio | Premium Web & App Development",
 
-  images: [
-    {
-      url: "/og-image.png",
-      width: 1200,
-      height: 630,
-      alt: "Shivniq Studio - Premium Web & App Development",
-    },
-  ],
-},
+    description:
+      "We build modern websites, web applications, mobile apps and AI solutions for startups and businesses.",
 
- twitter: {
-  card: "summary_large_image",
-  title: "Shivniq Studio | Premium Web & App Development",
-  description:
-    "Modern websites, web applications, mobile apps and AI solutions.",
-  images: ["/og-image.png"],
-},
+    url: "https://shivniq-studio.vercel.app",
+
+    siteName: "Shivniq Studio",
+
+    type: "website",
+
+    locale: "en_IN",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Shivniq Studio - Premium Web & App Development",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "Shivniq Studio | Premium Web & App Development",
+
+    description:
+      "Modern websites, web applications, mobile apps and AI solutions.",
+
+    images: ["/og-image.png"],
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -83,13 +92,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
