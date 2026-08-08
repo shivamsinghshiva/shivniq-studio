@@ -1,8 +1,7 @@
-
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-
+import Providers from "@/components/providers/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,10 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-  <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-    {children}
-  </body>
-</html>
+    <html lang="en" suppressHydrationWarning>
+     <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <Providers>
+  {children}
+  </Providers>
+</body>
+    </html>
   );
 }

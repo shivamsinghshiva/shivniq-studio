@@ -23,51 +23,62 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-8">
+    <section className="bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-8 py-24">
 
+        {/* Heading */}
         <div className="text-center">
 
-          <span className="text-purple-600 font-semibold">
+          <span className="text-purple-600 dark:text-purple-400 font-semibold">
             TESTIMONIALS
           </span>
 
-          <h2 className="text-5xl font-black mt-4">
+          <h2 className="text-5xl font-black mt-4 text-gray-900 dark:text-white">
             What Clients Say
           </h2>
 
-          <p className="text-gray-500 mt-5 max-w-2xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto">
             Our clients trust us to build high-quality digital products.
           </p>
 
         </div>
 
+        {/* Testimonials */}
         <div className="grid lg:grid-cols-3 gap-8 mt-20">
 
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="rounded-3xl border border-purple-100 bg-white p-8 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              className="rounded-3xl border border-purple-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-8 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
 
+              {/* Stars */}
               <div className="flex gap-1 text-yellow-400">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={18} fill="currentColor" />
+                  <Star
+                    key={star}
+                    size={18}
+                    fill="currentColor"
+                  />
                 ))}
               </div>
 
-              <p className="mt-6 leading-8 text-gray-600">
+              {/* Review */}
+              <p className="mt-6 leading-8 text-gray-600 dark:text-gray-300">
                 "{item.review}"
               </p>
 
+              {/* Client */}
               <div className="mt-8">
-                <h3 className="font-bold text-xl">
+
+                <h3 className="font-bold text-xl text-gray-900 dark:text-white">
                   {item.name}
                 </h3>
 
-                <p className="text-gray-500">
+                <p className="text-gray-500 dark:text-gray-400">
                   {item.company}
                 </p>
+
               </div>
 
             </div>

@@ -9,10 +9,10 @@ export default function Trusted() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-8">
+    <section className="bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-8 py-20">
 
-        <p className="text-center text-gray-500 font-semibold uppercase tracking-widest">
+        <p className="text-center text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-widest">
           Trusted by Startups & Businesses
         </p>
 
@@ -21,9 +21,9 @@ export default function Trusted() {
           {companies.map((company) => (
             <div
               key={company}
-              className="flex items-center justify-center rounded-2xl border border-gray-200 bg-white py-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+              className="flex items-center justify-center rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 py-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <span className="text-xl font-bold text-gray-700">
+              <span className="text-xl font-bold text-gray-700 dark:text-gray-200">
                 {company}
               </span>
             </div>

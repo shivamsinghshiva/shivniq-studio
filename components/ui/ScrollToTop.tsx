@@ -13,22 +13,26 @@ export default function ScrollToTop() {
 
     window.addEventListener("scroll", onScroll);
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   if (!show) return null;
 
   return (
     <button
+      type="button"
       onClick={() =>
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         })
       }
-      className="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white shadow-lg hover:scale-110 transition"
+      aria-label="Scroll to top"
+      className="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white shadow-lg transition hover:scale-110"
     >
-      <ChevronUp size={24} />
+      <ChevronUp size={22} />
     </button>
   );
 }

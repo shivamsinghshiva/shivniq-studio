@@ -42,55 +42,58 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-8">
+    <section
+      id="services"
+      className="bg-white dark:bg-gray-950 transition-colors duration-300"
+    >
+      <div className="max-w-7xl mx-auto px-8 py-24">
 
+        {/* Heading */}
         <div className="text-center">
 
-          <span className="text-purple-600 font-semibold">
+          <span className="text-purple-600 dark:text-purple-400 font-semibold">
             OUR SERVICES
           </span>
 
-          <h2 className="text-5xl font-black mt-4">
+          <h2 className="text-5xl font-black mt-4 text-gray-900 dark:text-white">
             Everything You Need
           </h2>
 
-          <p className="text-gray-500 mt-5 max-w-2xl mx-auto leading-8">
+          <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto leading-8">
             We help startups and businesses build world-class
             digital products with modern technologies.
           </p>
 
         </div>
 
+        {/* Services */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
 
           {services.map((service, index) => {
-
             const Icon = service.icon;
 
             return (
-
               <div
                 key={index}
-                className="group rounded-3xl border border-purple-100 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+                className="group rounded-3xl border border-purple-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-8 shadow-sm transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
               >
 
+                {/* Icon */}
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-pink-500 text-white">
-
                   <Icon size={30} />
-
                 </div>
 
-                <h3 className="mt-8 text-2xl font-bold">
+                {/* Title */}
+                <h3 className="mt-8 text-2xl font-bold text-gray-900 dark:text-white">
                   {service.title}
                 </h3>
 
-                <p className="mt-4 leading-7 text-gray-500">
+                {/* Description */}
+                <p className="mt-4 leading-7 text-gray-500 dark:text-gray-400">
                   {service.desc}
                 </p>
 
               </div>
-
             );
           })}
 

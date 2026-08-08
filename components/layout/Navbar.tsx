@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import Button from "@/components/ui/Button";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-lg">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-5">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90">
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
 
         {/* Logo */}
         <Link
@@ -21,50 +23,129 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 font-medium text-gray-700">
+        <div className="hidden md:flex items-center gap-8 font-medium text-gray-700 dark:text-gray-200">
+          <Link
+            href="#home"
+            className="hover:text-purple-600 transition"
+          >
+            Home
+          </Link>
 
-          <Link href="#home">Home</Link>
-          <Link href="#services">Services</Link>
-          <Link href="#portfolio">Portfolio</Link>
-          <Link href="#contact">Contact</Link>
+          <Link
+            href="#services"
+            className="hover:text-purple-600 transition"
+          >
+            Services
+          </Link>
+
+          <Link
+            href="#portfolio"
+            className="hover:text-purple-600 transition"
+          >
+            Portfolio
+          </Link>
+
+          <Link
+            href="#contact"
+            className="hover:text-purple-600 transition"
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* Desktop Right Side */}
+        <div className="hidden md:flex items-center gap-4">
+
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={() =>
+              setTheme(theme === "dark" ? "light" : "dark")
+            }
+            className="w-11 h-11 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Sun size={20} className="text-yellow-400" />
+            ) : (
+              <Moon size={20} className="text-gray-700" />
+            )}
+          </button>
+
+          <Button>
+            Start Project
+          </Button>
 
         </div>
 
-        {/* Desktop Button */}
-        <div className="hidden md:block">
-          <Button>Start Project</Button>
-        </div>
+        {/* Mobile Controls */}
+        <div className="md:hidden flex items-center gap-3">
 
-        {/* Mobile Button */}
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={30} /> : <Menu size={30} />}
-        </button>
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={() =>
+              setTheme(theme === "dark" ? "light" : "dark")
+            }
+            className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Sun size={19} className="text-yellow-400" />
+            ) : (
+              <Moon size={19} />
+            )}
+          </button>
+
+          {/* Menu Button */}
+          <button
+            type="button"
+            className="text-gray-800 dark:text-white"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={30} /> : <Menu size={30} />}
+          </button>
+
+        </div>
 
       </div>
 
       {/* Mobile Menu */}
-
       {open && (
-        <div className="md:hidden bg-white border-t">
+        <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
 
-          <div className="flex flex-col p-6 gap-6">
+          <div className="flex flex-col p-6 gap-6 text-gray-800 dark:text-gray-200">
 
-            <Link href="#" onClick={() => setOpen(false)}>
+            <Link
+              href="#home"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
               Home
             </Link>
 
-            <Link href="#" onClick={() => setOpen(false)}>
+            <Link
+              href="#services"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
               Services
             </Link>
 
-            <Link href="#" onClick={() => setOpen(false)}>
+            <Link
+              href="#portfolio"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
               Portfolio
             </Link>
 
-            <Link href="#" onClick={() => setOpen(false)}>
+            <Link
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="hover:text-purple-600 transition"
+            >
               Contact
             </Link>
 
