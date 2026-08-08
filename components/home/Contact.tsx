@@ -34,21 +34,21 @@ export default function Contact() {
   };
 
   return (
-    <section
+   <section
   id="contact"
-  className="relative bg-red-100 dark:bg-red-950 transition-colors duration-300"
+  className="scroll-mt-24 bg-white dark:bg-gray-950 transition-colors duration-300"
 >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
 
         {/* Heading */}
         <div className="text-center">
-          <span className="text-purple-600 dark:text-purple-400 font-semibold text-sm sm:text-base">
-            CONTACT US
-          </span>
+       <span className="text-purple-600 dark:text-purple-400 font-semibold text-sm sm:text-base">
+  CONTACT US
+</span>
 
-          <h2 className="text-4xl sm:text-5xl font-black mt-4 text-gray-900 dark:text-white">
-            Let's Build Something Amazing
-          </h2>
+         <h2 className="text-4xl sm:text-5xl font-black mt-4 text-gray-900 dark:text-white">
+  Let's Build Something Amazing
+</h2>
 
           <p className="text-gray-500 dark:text-gray-400 mt-5 max-w-2xl mx-auto text-sm sm:text-base leading-7">
             Have a project in mind? We'd love to hear from you.
@@ -109,7 +109,7 @@ export default function Contact() {
           <form
             ref={form}
             onSubmit={sendEmail}
-            className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-lg p-5 sm:p-8 space-y-5 sm:space-y-6"
+           className="bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-xl dark:shadow-purple-950/20 p-5 sm:p-8 space-y-5 sm:space-y-6 backdrop-blur-sm"
           >
 
             <input
@@ -117,7 +117,7 @@ export default function Contact() {
               name="from_name"
               placeholder="Your Name"
               required
-              className="w-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 transition"
+             className="w-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 outline-none focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 transition"
             />
 
             <input
