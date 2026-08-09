@@ -16,15 +16,19 @@ const projects = [
     category: "Artificial Intelligence",
     image: "/images/project3.png",
   },
+  {
+    title: "College Website & Management System",
+    category: "Web Development",
+    image: "/images/college-website.png",
+    liveUrl: "https://college-website-93qk.onrender.com/",
+    githubUrl: "https://github.com/shivamsinghshiva/college-website",
+  },
 ];
 
 export default function Portfolio() {
   return (
-    <section
-      id="portfolio"
-      className="bg-white dark:bg-gray-950 transition-colors duration-300"
-    >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+    <section className="py-20 sm:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
         <div className="text-center">
@@ -74,6 +78,33 @@ export default function Portfolio() {
                 <h3 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {project.title}
                 </h3>
+
+                {/* Buttons only for projects having links */}
+                {project.liveUrl && (
+                  <div className="flex flex-wrap gap-3 mt-5">
+
+                    {/* Live Demo */}
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition"
+                    >
+                      Live Demo
+                    </a>
+
+                    {/* GitHub */}
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                    >
+                      GitHub
+                    </a>
+
+                  </div>
+                )}
 
               </div>
 
